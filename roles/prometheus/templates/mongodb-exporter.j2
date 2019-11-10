@@ -1,0 +1,13 @@
+[Unit]
+Description=Mongodb Exporter
+After=network.target
+
+[Service]
+User=mongodb_exporter
+Group=mongodb_exporter
+Type=simple
+ExecStart=/usr/local/bin/mongodb_exporter
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,12 @@
+[Unit]
+Description=process Exporter
+After=network.target
+
+[Service]
+User=process_exporter
+Group=process_exporter
+Type=simple
+ExecStart=/usr/local/bin/process_exporter -config.path /etc/process_exporter/process_config.yml
+
+[Install]
+WantedBy=multi-user.target

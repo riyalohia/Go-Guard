@@ -1,0 +1,12 @@
+[Unit]
+Description=Nginx Log Exporter
+After=network.target
+
+[Service]
+User=root
+Group=root
+Type=simple
+ExecStart=/usr/local/bin/nginxlog_exporter -config-file /etc/nginxlog_exporter/nginxlog_config.yml
+
+[Install]
+WantedBy=multi-user.target

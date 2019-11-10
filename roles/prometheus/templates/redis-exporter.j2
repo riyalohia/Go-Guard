@@ -1,0 +1,12 @@
+[Unit]
+Description=Redis Exporter
+After=network.target
+
+[Service]
+User=redis_exporter
+Group=redis_exporter
+Type=simple
+ExecStart=/usr/local/bin/redis_exporter
+
+[Install]
+WantedBy=multi-user.target

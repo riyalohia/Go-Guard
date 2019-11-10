@@ -1,0 +1,30 @@
+---
+
+- name: Adding user for MongoDB Exporter
+  user:
+    name: mongodb_exporter
+    shell: /sbin/nologin
+
+- name: Copying the binary file
+  copy:
+    src: "mongodb_exporter"
+    dest: "/usr/local/bin/"
+    mode: 0755
+
+- name: Creating Service for MongoDB Exporter
+  template:
+    src: mongodb-exporter.j2
+    dest: /etc/systemd/system/mongodb_exporter.service
+    mode: 0755
+
+- name: Daemon reload for MongoDB Exporter
+  systemd:
+    name: mongodb_exporter
+    daemon_reload: yes
+
+- name: Configuring service
+  systemd:
+    name: mongodb_exporter
+    daemon_reload: yes
+    state: started
+    enabled: yes

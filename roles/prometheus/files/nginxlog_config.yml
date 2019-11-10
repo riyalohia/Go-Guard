@@ -1,0 +1,15 @@
+listen:
+  port: 8188
+  address: "0.0.0.0"
+
+namespaces:
+  - name: nginx_access
+    format: '[$time_local] "$http_x_forwarded_for" "$remote_addr" "$upstream_addr" "$http_host" "$remote_user" "$request" "$http_referer" "$http_user_agent" "$upstream_status" "$status" "$body_bytes_sent" "$bytes_sent" "$upstream_response_time" "$request_time"'
+    source_files:
+      - /var/log/nginx/access.log
+    labels:
+      app: "nginx_log"
+      environment: "production"
+      logtype: "access.log"
+    histogram_buckets: [.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]
+

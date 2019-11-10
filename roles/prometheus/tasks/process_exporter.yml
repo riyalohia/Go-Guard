@@ -1,0 +1,38 @@
+---
+- name: Add the user process-exporter
+  user:
+    name: process_exporter
+    shell: /sbin/nologin
+
+
+- name: Copying the binary file
+  copy:
+    src: "process_exporter"
+    dest: "/usr/local/bin/"
+    mode: 0755
+
+- name: Create Process Exporter Service
+  template:
+    src: "process-exporter.j2"
+    dest: /etc/systemd/system/process_exporter.service
+    mode: 0755
+
+- name: Moving config file to desired location
+  copy:
+    src: "process_config.yml"
+    dest: /etc/process_exporter/
+    mode: 0755
+
+- name: Daemon reload for Process Exporter
+  systemd:
+    name: process_exporter
+    daemon_reload: yes
+
+- name:  Enable Process Exporter service
+  systemd:
+    name: process_exporter
+    state: started
+    enabled: yes
+
+
+

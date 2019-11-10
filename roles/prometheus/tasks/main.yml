@@ -1,0 +1,14 @@
+---
+
+- include_tasks: "node_exporter.yml"
+
+- include_tasks: "process_exporter.yml"
+
+- include_tasks: "mongo_exporter.yml"
+
+
+#- include_tasks: "nginx_exporter.yml"
+
+
+- include_tasks: "redis_exporter.yml"
+
